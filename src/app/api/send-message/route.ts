@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     // Validate message content
     const validationResult = messageSchema.safeParse({ content });
     if (!validationResult.success) {
-        const errorMessage = validationResult.error.errors[0]?.message || "Invalid message";
+        const errorMessage = validationResult.error.issues[0]?.message || "Invalid message";
         return Response.json({
             success: false,
             message: errorMessage
