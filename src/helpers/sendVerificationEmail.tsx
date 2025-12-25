@@ -19,7 +19,7 @@ export async function sendVerificationEmail(
             from: 'No Reply <no-reply@sialschool.space>',
             to: toEmail,
             subject: 'Verification Code',
-            react: VerificationEmail({ username, otp: verifyCode }),
+            react: <VerificationEmail username={username} otp={verifyCode} />
         });
         
         // Check if the response contains an error
