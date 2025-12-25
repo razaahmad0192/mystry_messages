@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { ApiResponse } from "../types/ApiResponse";
+import React from "react";
 
 import VerificationEmail from "@/src/emails/VerificationEmail";
 
@@ -19,7 +20,7 @@ export async function sendVerificationEmail(
             from: 'No Reply <no-reply@sialschool.space>',
             to: toEmail,
             subject: 'Verification Code',
-            react: VerificationEmail({ username, otp: verifyCode }),
+            react: React.createElement(VerificationEmail, { username, otp: verifyCode }),
         });
         
         // Check if the response contains an error
@@ -37,11 +38,12 @@ export async function sendVerificationEmail(
             message: "Verification email sent successfully.",
         };
 
-    } catch (error: any) {
+    } catch (error) {
         console.error("Error sending verification email:", error);
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return {
             success: false,
-            message: `Failed to send verification email: ${error?.message || 'Unknown error'}`,
+            message: `Failed to send verification email: ${errorMessage}`,
         };
     }
 }

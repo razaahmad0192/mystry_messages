@@ -9,17 +9,18 @@ export async function POST(request: Request) {
         const decodedUsername = decodeURIComponent(username);
         const user = await UserModel.findOne({ username: decodedUsername });
         
-        if(user.isVerified){
-            return Response.json({
-                success: true,
-                message: "User is already verified"
-            }, { status: 200 });
-        }
         if (!user) {
             return Response.json({
                 success: false,
                 message: "User not found"
             }, { status: 404 });
+        }
+        
+        if(user.isVerified){
+            return Response.json({
+                success: true,
+                message: "User is already verified"
+            }, { status: 200 });
         }
         const isCodeNotExpired = user.verifyCodeExpiry && new Date(user.verifyCodeExpiry) > new Date();
         const isCodeValid = user.verifyCode === code
