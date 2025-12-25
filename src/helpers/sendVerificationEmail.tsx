@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import { Resend } from "resend";
 import { ApiResponse } from "../types/ApiResponse";
 
