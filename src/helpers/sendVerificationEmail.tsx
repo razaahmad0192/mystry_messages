@@ -1,8 +1,5 @@
-export const runtime = "nodejs";
 import { Resend } from "resend";
 import { ApiResponse } from "../types/ApiResponse";
-
-import VerificationEmail from "@/src/emails/VerificationEmail";
 
 if (!process.env.RESEND_API_KEY) {
     throw new Error("RESEND_API_KEY is not defined");
@@ -16,13 +13,27 @@ export async function sendVerificationEmail(
 ): Promise<ApiResponse> {
     try {
         console.log("Sending verification email to:", toEmail);
+
+        // Create plain HTML content
+        const htmlContent = `
+            <html>
+                <body>
+                    <p>Hello ${username},</p>
+                    <p>Your verification code is: <strong>${verifyCode}</strong></p>
+                    <p>Please use this code to complete your verification process.</p>
+                    <br/>
+                    <p>Regards,<br/>Mystry Messages Team</p>
+                </body>
+            </html>
+        `;
+
         const response = await resend.emails.send({
             from: 'No Reply <no-reply@sialschool.space>',
             to: toEmail,
             subject: 'Verification Code',
-            react: <VerificationEmail username={username} otp={verifyCode} />
+            html: htmlContent, // Use plain HTML instead of React component
         });
-        
+
         // Check if the response contains an error
         if (response.error) {
             console.error("Resend API error:", response.error);
@@ -31,7 +42,7 @@ export async function sendVerificationEmail(
                 message: `Failed to send verification email: ${response.error.message || 'Unknown error'}`,
             };
         }
-        
+
         console.log("Verification email sent successfully. Email ID:", response.data?.id);
         return {
             success: true,
