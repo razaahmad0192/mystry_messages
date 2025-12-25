@@ -8,7 +8,6 @@ export async function proxy(request: NextRequest) {
 
   const isAuthPage =
     pathname.startsWith("/sign-in") ||
-    pathname.startsWith("/sign-up") ||
     pathname.startsWith("/verify");
 
   // If user is logged in → block access to auth pages
@@ -29,7 +28,7 @@ export const config = {
     "/dashboard/:path*",
     "/verify/:path*",
     "/sign-in",
-    "/sign-up",
+   
   ],
 
 };
