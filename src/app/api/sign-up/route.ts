@@ -1,6 +1,7 @@
 import dbConnect from "@/src/lib/dbConnect";
 import UserModel from "@/src/model/User";
 import bcrypt from "bcryptjs";
+export const runtime = "nodejs";
 
 
 import { sendVerificationEmail } from "@/src/helpers/sendVerificationEmail";
