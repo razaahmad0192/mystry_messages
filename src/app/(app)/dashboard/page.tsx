@@ -14,7 +14,7 @@ import { Button } from '@/src/components/ui/button'
 import { Switch } from '@/src/components/ui/switch'
 import { Separator } from '@/src/components/ui/separator'
 import { User } from 'next-auth'
-function page() {
+function Page() {
   const [messages, setMessages] = useState<Message[]>([])
 
   const [isLoading, setIsLoading] = useState(false)
@@ -77,9 +77,8 @@ function page() {
       setValue('acceptMessages', !acceptMessages)
       toast.success(response.data.message)
     } catch (error) {
-      console.log("Ay penchod error ay: ", error)
       const axiosError = error as AxiosError<ApiResponse>
-      toast.error(axiosError.response?.data.message || 'Error fetching messages')
+      toast.error(axiosError.response?.data.message || 'Error updating accept messages setting')
     }
   }
   if (!session || !session.user) {
@@ -139,9 +138,9 @@ function page() {
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
+          messages.map((message) => (
             <MessageCard
-              key={message._id}
+              key={message._id.toString()}
               message={message}
               onMessageDelete={handleDeleteMessage}
             />
@@ -155,4 +154,4 @@ function page() {
 
 }
 
-export default page
+export default Page
