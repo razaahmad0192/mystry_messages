@@ -8,13 +8,13 @@ import { User } from "next-auth";
 export async function POST(request: Request) {
     await dbConnect();
     const session = await getServerSession(authOptions);
-    const user: User = session?.user as User;
-    if (!user || !session.user) {
+    if (!session || !session.user) {
         return Response.json({
             success: false,
             message: "Unauthorized"
         }, { status: 401 })
     }
+    const user: User = session.user as User;
 
     const userId = user._id;
     const { acceptMessages } = await request.json();
@@ -44,8 +44,7 @@ export async function POST(request: Request) {
         )
 
     } catch (error) {
-
-        console.error("Failed to update User Status to accept messages")
+        console.error("Failed to update User Status to accept messages", error)
         return Response.json(
             {
                 success: false,
@@ -56,17 +55,17 @@ export async function POST(request: Request) {
     }
 }
 
-export async function GET(request: Request) {
+export async function GET(_request: Request) {
     await dbConnect();
 
     const session = await getServerSession(authOptions);
-    const user: User = session?.user as User;
-    if (!user || !session.user) {
+    if (!session || !session.user) {
         return Response.json({
             success: false,
             message: "Unauthorized"
         }, { status: 401 })
     }
+    const user: User = session.user as User;
 
     const userId = user._id;
 
