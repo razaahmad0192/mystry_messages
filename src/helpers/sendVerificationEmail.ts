@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { ApiResponse } from "../types/ApiResponse";
+import { render } from "@react-email/render";
 import React from "react";
-
 import VerificationEmail from "@/src/emails/VerificationEmail";
 
 if (!process.env.RESEND_API_KEY) {
@@ -16,11 +16,13 @@ export async function sendVerificationEmail(
 ): Promise<ApiResponse> {
     try {
         console.log("Sending verification email to:", toEmail);
+        const emailHtml = await render(React.createElement(VerificationEmail, { username, otp: verifyCode }));
+        
         const response = await resend.emails.send({
             from: 'No Reply <no-reply@sialschool.space>',
             to: toEmail,
             subject: 'Verification Code',
-            react: React.createElement(VerificationEmail, { username, otp: verifyCode }),
+            html: emailHtml,
         });
         
         // Check if the response contains an error
