@@ -82,8 +82,8 @@ function VerifyAccount() {
     // Show loading state while checking user
     if (isCheckingUser) {
         return (
-            <div className='flex justify-center items-center min-h-[83vh] bg-gray-100'>
-                <div className='w-full px-4 sm:p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md'>
+            <div className='flex justify-center items-center min-h-[83vh] bg-gray-100 md:mt-0 mt-20'>
+                <div className='w-full px-4 sm:p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md '>
                     <div className="flex flex-col items-center justify-center min-h-[300px]">
                         <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
                         <p className="text-muted-foreground">Checking user...</p>
@@ -96,7 +96,7 @@ function VerifyAccount() {
     // Show error page if user doesn't exist
     if (userExists === false) {
         return (
-            <div className='flex justify-center items-center min-h-[83vh] bg-gray-100'>
+            <div className='flex justify-center items-center min-h-[83vh] bg-gray-100 md:mt-0 mt-20'>
                 <div className='w-full px-4 sm:p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md'>
                     <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
                         <UserX className="h-16 w-16 text-destructive mb-4" />
@@ -121,7 +121,7 @@ function VerifyAccount() {
     // Show already verified page if user is already verified
     if (userExists === true && isVerified === true) {
         return (
-            <div className='flex justify-center items-center min-h-[83vh] bg-gray-100'>
+            <div className='flex justify-center items-center min-h-[83vh] bg-gray-100 md:mt-0 mt-20'>
                 <div className='w-full px-4 sm:p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md'>
                     <div className="flex flex-col items-center justify-center min-h-[300px] text-center">
                         <CheckCircle2 className="h-16 w-16 text-green-500 mb-4" />
@@ -144,7 +144,7 @@ function VerifyAccount() {
     }
 
     return (
-        <div className='flex justify-center items-center min-h-[83vh] bg-gray-100'>
+        <div className='flex justify-center items-center min-h-[83vh] bg-gray-100 md:mt-0 mt-20'>
             <div className='w-full p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md'>
                 <div className="text-center">
                     <h1 className="text-4xl text-center font-extrabold tracking-tight lg:text-5xl mb-6">Verify Your Account</h1>

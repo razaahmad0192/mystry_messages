@@ -50,7 +50,7 @@ const page = () => {
 
   return (
     <div className='flex justify-center items-center min-h-[83vh] bg-gray-100'>
-      <div className='w-full p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md'>
+      <div className='w-full p-8 max-w-md space-y-8 bg-white rounded-lg shadow-md md:mt-0 mt-20 '>
         <div className="text-center">
           <h1 className="text-4xl text-center font-extrabold tracking-tight lg:text-5xl mb-6">Welcome Back</h1>
           <p className='mb-4 text-center font-medium'>
