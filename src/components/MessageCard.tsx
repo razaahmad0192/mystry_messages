@@ -38,36 +38,36 @@ function MessageCard({message, onMessageDelete}: messageCardProps) {
         onMessageDelete(message._id.toString())
     }
     return (
-        <Card className="card-bordered">
+        <Card className="bg-gray-600 border-gray-500">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <CardTitle>{message.content}</CardTitle>
+          <CardTitle className="text-white">{message.content}</CardTitle>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant='destructive'>
                 <X className="w-5 h-5" />
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="bg-gray-700 border-gray-600">
               <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
+                <AlertDialogTitle className="text-white">Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription className="text-gray-300">
                   This action cannot be undone. This will permanently delete
                   this message.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel>
+                <AlertDialogCancel className="bg-gray-600 text-white border-gray-500 hover:bg-gray-500">
                   Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction onClick={handleDeleteConfirm}>
+                <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
                   Continue
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <div className="text-sm">
+        <div className="text-sm text-gray-400">
           {dayjs(message.createdAt).format('MMM D, YYYY h:mm A')}
         </div>
       </CardHeader>

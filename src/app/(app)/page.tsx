@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       {/* Main content */}
-      <main className="flex-grow min-h-[83vh] flex flex-col items-center justify-center px-4 sm:px-6 md:px-24 py-12 bg-gray-800 text-white w-full overflow-x-hidden">
+      <main className="flex-grow min-h-[92.5vh] flex flex-col items-center justify-center px-4 sm:px-6 md:px-24 py-12 pt-24 bg-gray-800 text-white w-full overflow-x-hidden">
         <section className="text-center mb-8 md:mb-12">
           <h1 className="text-3xl md:text-5xl font-bold">
             Dive into the World of Anonymous Feedback
