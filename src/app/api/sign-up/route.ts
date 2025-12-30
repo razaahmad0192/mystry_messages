@@ -30,8 +30,9 @@ export async function POST(request: Request) {
                     message: "Email is already registered.",
                 }, { status: 400 });
             } else {
-                const hashedPassword = await bcrypt.hash(password, 10);
-                existingUserByEmail.password = hashedPassword;
+                // const hashedPassword = await bcrypt.hash(password, 10);
+                // existingUserByEmail.password = hashedPassword;
+                existingUserByEmail.password = password;
                 existingUserByEmail.verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
                 existingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes from now
                 await existingUserByEmail.save();
@@ -48,14 +49,15 @@ export async function POST(request: Request) {
                 }, { status: 201 });
             }
         } else {
-            const hashedPassword = await bcrypt.hash(password, 10);
+            // const hashedPassword = await bcrypt.hash(password, 10);
             const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
             const verifyCodeExpiry = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes from now
 
             const newUser = new UserModel({
                 username,
                 email,
-                password: hashedPassword,
+                // password: hashedPassword,
+                password: password,
                 verifyCode,
                 verifyCodeExpiry,
                 isVerified: false,

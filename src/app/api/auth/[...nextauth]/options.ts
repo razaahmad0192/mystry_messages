@@ -29,7 +29,8 @@ export const authOptions: NextAuthOptions = {
                     if (!user.isVerified) {
                         throw new Error("User is not verified");
                     }
-                    const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
+                    // const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password);
+                    const isPasswordCorrect = credentials.password === user.password;
                     if (isPasswordCorrect) {
                         return user;
                     }
